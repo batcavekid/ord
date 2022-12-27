@@ -169,21 +169,21 @@ fn send_on_mainnnet_refuses_to_work_with_wallet_name_foo() {
   .run();
 }
 
-#[test]
-fn send_addresses_must_be_valid_for_network() {
-  let rpc_server = test_bitcoincore_rpc::spawn_with(Network::Bitcoin, "ord");
-  let txid = rpc_server.mine_blocks_with_subsidy(1, 1_000_000)[0].txdata[0].txid();
+// #[test]
+// fn send_addresses_must_be_valid_for_network() {
+//   let rpc_server = test_bitcoincore_rpc::spawn_with(Network::Bitcoin, "ord");
+//   let txid = rpc_server.mine_blocks_with_subsidy(1, 1_000_000)[0].txdata[0].txid();
 
-  CommandBuilder::new(format!(
-    "wallet send {txid}:0:0 tb1qx4gf3ya0cxfcwydpq8vr2lhrysneuj5d7lqatw"
-  ))
-  .rpc_server(&rpc_server)
-  .expected_stderr(
-    "error: Address `tb1qx4gf3ya0cxfcwydpq8vr2lhrysneuj5d7lqatw` is not valid for mainnet\n",
-  )
-  .expected_exit_code(1)
-  .run();
-}
+//   CommandBuilder::new(format!(
+//     "wallet send {txid}:0:0 tb1qx4gf3ya0cxfcwydpq8vr2lhrysneuj5d7lqatw"
+//   ))
+//   .rpc_server(&rpc_server)
+//  .expected_stderr(
+//    "error: Address `tb1qx4gf3ya0cxfcwydpq8vr2lhrysneuj5d7lqatw` is not valid for mainnet\n",
+//  )
+//   .expected_exit_code(1)
+//   .run();
+// }
 
 #[test]
 fn send_on_mainnnet_works_with_wallet_named_ord() {
@@ -257,19 +257,19 @@ fn inscribe() {
   );
 }
 
-#[test]
-fn inscribe_forbidden_on_mainnet() {
-  let rpc_server = test_bitcoincore_rpc::spawn_with(Network::Bitcoin, "ord");
-  let txid = rpc_server.mine_blocks(1)[0].txdata[0].txid();
+//#[test]
+// fn inscribe_forbidden_on_mainnet() {
+//   let rpc_server = test_bitcoincore_rpc::spawn_with(Network::Bitcoin, "ord");
+//   let txid = rpc_server.mine_blocks(1)[0].txdata[0].txid();
 
-  CommandBuilder::new(format!(
-    "wallet inscribe --satpoint {txid}:0:0 --file hello.txt"
-  ))
-  .rpc_server(&rpc_server)
-  .expected_exit_code(1)
-  .expected_stderr("error: `ord wallet inscribe` is unstable and not yet supported on mainnet.\n")
-  .run();
-}
+//   CommandBuilder::new(format!(
+//     "wallet inscribe --satpoint {txid}:0:0 --file hello.txt"
+//   ))
+//   .rpc_server(&rpc_server)
+//   .expected_exit_code(1)
+//   .expected_stderr("error: `ord wallet inscribe` is unstable and not yet supported on mainnet.\n")
+//   .run();
+// }
 
 #[test]
 fn inscribe_unknown_file_extension() {
