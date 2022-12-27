@@ -119,11 +119,11 @@ impl Options {
   pub(crate) fn bitcoin_rpc_client_mainnet_forbidden(&self, command: &str) -> Result<Client> {
     let client = self.bitcoin_rpc_client()?;
 
-//    if self.chain() == Chain::Mainnet {
+    if self.chain() == Chain::Mainnet {
 //      bail!("`{command}` is unstable and not yet supported on mainnet.");
 //    }
-//    Ok(client)
-//  }
+    Ok(client)
+  }
 
   pub(crate) fn bitcoin_rpc_client_for_wallet_command(&self, command: &str) -> Result<Client> {
     let client = self.bitcoin_rpc_client()?;
