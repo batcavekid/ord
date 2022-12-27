@@ -6,7 +6,7 @@ use {
 #[derive(Debug, Parser)]
 #[clap(group(
   ArgGroup::new("chains")
-    .required(false)
+//    .required(false)
     .args(&["chain", "signet", "regtest", "testnet"]),
 ))]
 pub(crate) struct Options {
